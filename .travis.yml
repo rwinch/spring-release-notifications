@@ -17,7 +17,7 @@ after_success:
       ./ci/scripts/install-cf.sh
       export PATH=$PATH:$PWD
       cf login -a $CF_ENDPOINT -o $CF_ORGANIZATION -s $CF_SPACE -u $CF_USERNAME -p $CF_PASSWORD
-      ./ci/scripts/cf-push.sh spring-release-notifications $SLACK_OAUTH_TOKEN $SLACK_CHANNEL_ID $GITHUB_SECRET $TRAVIS_BUILD_NUMBER-$TRAVIS_COMMIT
+      ./ci/scripts/cf-push.sh spring-release-notifications "$SLACK_OAUTH_TOKEN" "$SLACK_CHANNEL_ID" "$GITHUB_SECRET" "$TRAVIS_BUILD_NUMBER-$TRAVIS_COMMIT"
     fi
 
 after_failure: cat $PWD/build/reports/tests/*/classes/*.html
