@@ -18,10 +18,11 @@ package io.spring.tools
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-@ConfigurationPropertiesScan
+@EnableConfigurationProperties(*arrayOf(SlackProperties::class, GithubProperties::class))
 class SpringReleaseNotificationsApplication
 
 fun main(args: Array<String>) {
