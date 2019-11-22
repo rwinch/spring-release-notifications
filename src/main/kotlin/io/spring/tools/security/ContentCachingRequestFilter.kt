@@ -31,6 +31,19 @@ import javax.servlet.http.HttpServletRequestWrapper
 import javax.servlet.http.HttpServletResponse
 
 /**
+ * Wraps the [HttpServletRequest] so that the body is cached and can be accessed multiple
+ * times.
+ *
+ * The servlet API states that [HttpServletRequest.getInputStream] and
+ * [HttpServletRequest.getReader] can only be invoked a single time. This is problematic
+ * when needing to [check the signature][GitHubServletSignature] of the body since
+ * security needs to first read the body and then let the controller read the body for
+ * processing.
+ *
+ * [ContentCachingRequestFilter] wraps the [HttpServletRequest] so that both
+ * [HttpServletRequest.getInputStream] and [HttpServletRequest.getReader] are cached
+ * allowing for them to be read multiple times.
+ *
  * @author Rob Winch
  */
 class ContentCachingRequestFilter : OncePerRequestFilter() {
