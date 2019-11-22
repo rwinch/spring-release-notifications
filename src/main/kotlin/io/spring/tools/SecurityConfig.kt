@@ -33,9 +33,11 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         http
                 .addFilterBefore(ContentCachingRequestFilter(), ChannelProcessingFilter::class.java)
                 .csrf().disable()
+                .httpBasic().and()
                 .authorizeRequests { requests ->
                     requests
                             .mvcMatchers("/github/events").access("@github.check(request)")
+                            .anyRequest().authenticated()
                 }
     }
 
